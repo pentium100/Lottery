@@ -129,6 +129,10 @@
         	  }
 
         	}
+           ,{id:'homeTeamPosition',header: "主队排名", width: 20, sortable: true,  dataIndex: 'homeTeamPosition', filter:{type:'numeric'}, hidden: true
+        	   , editor:{xtype:'numberfield'}
+        	   
+           }           
            ,{id:'awayTeam',dataIndex:'awayTeam',header: "客队", width: 100, sortable: true, storeKey:'team', renderer: renderTeamName
         	   ,editor:{
         		   xtype: 'combo',
@@ -139,7 +143,12 @@
         		   
         	  }
 
+           }
+           ,{id:'awayTeamPosition',header: "客队排名", width: 20, sortable: true,  dataIndex: 'awayTeamPosition', filter:{type:'numeric'}, hidden: true
+        	   , editor:{xtype:'numberfield'}
+        	   
            }           
+           
            ,{id:'rankDiff',dataIndex:'rankDiff',header: "排名差", width: 50, sortable: true, hidden:true
         	   ,editor:{
         		   xtype: 'numberfield'
