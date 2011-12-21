@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<!-- 定义Spring MVC 的模板文件 -->
+	<mvc:resources mapping="/js/**" location="/js/" />
+	<mvc:resources mapping="/restful/**" location="/restful/" />
+	<mvc:annotation-driven />
+
+
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+	<bean
+		class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<util:list id="beanList">
+				<bean id="stringHttpMessageConverter"
+					class="org.springframework.http.converter.StringHttpMessageConverter" />
+				<bean id="formHttpMessageConverter"
+					class="org.springframework.http.converter.FormHttpMessageConverter" />
+				<bean id="byteArrayMessageConverter"
+					class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+				<bean id="bufferedImageHttpMessageConverter"
+					class="org.springframework.http.converter.BufferedImageHttpMessageConverter" />
+				<bean id="jacksonMessageConverter"
+					class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+			</util:list>
+		</property>
+	</bean>
+
+
+	<bean id="viewResolver"
+
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />     <!-- 支持JSTL -->
+
+		<property name="prefix" value="/WEB-INF/views/" />     <!-- 模板的路径 -->
+
+		<property name="suffix" value=".jsp" />                 <!-- 模板文件的后缀 -->
+
+	</bean>
+
+
+
+	<!-- 依赖注入到HelloController这个类 -->
+
+	<bean id="menuController" class="com.itg.web.ctl.MenuController">
+		<property name="viewName">  <!-- 设定viewName属性的值为hello -->
+			<value>getMenu</value>
+		</property>
+		<property name="menuItemDAO">     <!-- 设置属性userDao为Hibernate的Dao对象 -->
+			<ref bean="menuItemDAOProxy" /> <!-- 注入一个bean(定义在Hibernate的配置文件里) -->
+		</property>
+	</bean>
+
+
+	<bean id="reportMemoController" class="com.itg.web.ctl.ReportMemoController">
+		<property name="viewName">
+			<value>reportMemo</value>
+		</property>
+
+		<property name="userRolesDAO">     <!-- 设置属性userDao为Hibernate的Dao对象 -->
+			<ref bean="userRolesDAOProxy" /> <!-- 注入一个bean(定义在Hibernate的配置文件里) -->
+		</property>
+
+		<property name="rolesDAO">     <!-- 设置属性userDao为Hibernate的Dao对象 -->
+			<ref bean="rolesDAOProxy" /> <!-- 注入一个bean(定义在Hibernate的配置文件里) -->
+		</property>
+
+	</bean>
+
+	<bean id="propertyController" class="com.itg.web.ctl.PropertyController">
+		<property name="viewName">
+			<value>property</value>
+		</property>
+		<property name="propertyTypeDAO">
+			<ref bean="propertyTypeDAOProxy" />
+		</property>
+
+	</bean>
+
+	<bean id="matchController" class="com.itg.web.ctl.MatchController">
+		<property name="viewName">
+			<value>match</value>
+		</property>
+
+	</bean>
+	<bean id="analyzeController1" class="com.itg.web.ctl.AnalyzeController1">
+		<property name="viewName">
+			<value>matchAnalyze1</value>
+		</property>
+		<property name="analyze2View">
+			<value>matchAnalyze2</value>
+		</property>
+
+		<property name="onlyResultView">
+			<value>resultOnly</value>
+		</property>
+		<property name="matchDAO">
+			<ref bean="matchDAO" />
+		</property>
+		<property name="matchMouthDAO">
+			<ref bean="matchMouthDAO" />
+		</property>
+
+	</bean>
+
+
+</beans>
+
+
+

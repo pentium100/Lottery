@@ -1,0 +1,21 @@
+<ehcache>   
+	<diskStore path="java.io.tmpdir" />   
+	<defaultCache   
+		maxElementsInMemory="10000"  
+		eternal="false"                
+		timeToIdleSeconds="1200"        
+		timeToLiveSeconds="1200"        
+		overflowToDisk="true"          
+		/>
+         
+         
+	<cache name="com.itg.dao.Match"
+		maxElementsInMemory="0" 
+		overflowToDisk="false"></cache>    
+    
+
+	<cache name="com.itg.dao.MouthMatch"
+		maxElementsInMemory="0" 
+		overflowToDisk="false"></cache>    
+
+</ehcache>  

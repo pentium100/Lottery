@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+      <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+
+           <property name="driverClassName">
+
+                 <value>net.sourceforge.jtds.jdbc.Driver</value>
+
+            </property>
+
+           <property name="url">
+
+
+                 <value>jdbc:jtds:sqlserver://localhost:1433/Lottery;</value>
+
+           </property>
+
+           <property name="username">
+
+                 <value>sa</value>
+
+           </property>
+
+           <property name="password">
+
+                 <value>36987</value>
+
+           </property>
+
+      </bean>
+
+      <bean id="jdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+      		<constructor-arg><ref bean="dataSource"/></constructor-arg> 
+      </bean>
+
+<!-- hibernate3 session Bean-->
+
+      <bean id="sessionFactory"
+
+      class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+
+           <property name="dataSource"> <!-- 注入数据源 -->
+
+                 <ref local="dataSource" />
+
+           </property>
+
+           <property name="annotatedClasses">    <!-- 需要加载的Hibernate实体类(不需要hbm.xml了) -->
+
+                 <list>
+                      <value>com.itg.dao.MenuItem</value>
+                      <value>com.itg.dao.PropertyType</value>
+                      <value>com.itg.dao.Property</value>
+                      <value>com.itg.dao.Match</value>
+                      <value>com.itg.dao.HistoryResult</value>
+                      <value>com.itg.dao.WarningFilter</value>
+                      <value>com.itg.dao.MatchMouth</value>
+                      <value>com.itg.dao.OddPredict</value>
+                      
+                 </list>
+
+           </property>
+
+           <property name="hibernateProperties">
+
+                 <props>
+
+                      <prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+
+                      <prop key="hibernate.show_sql">true</prop>
+                      <prop key="hibernate.hbm2ddl.auto">update</prop>
+                      <prop key="hibernate.connection.pool_size">20</prop>
+                      <prop key="hibernate.dbcp.initialSize">10</prop>
+                      <prop key="hibernate.dbcp.maxWait">300</prop>
+                      <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+                      <prop key="hibernate.cache.use_query_cache">true</prop>  
+                      <prop key="hibernate.cache.use_second_level_cache">true</prop>
+
+                 </props>
+
+           </property>
+
+      </bean>
+
+ 
+
+      <!-- 事务管理 -->
+
+      <bean id="transactionManager"
+
+           class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+
+           <property name="sessionFactory">
+
+                 <ref local="sessionFactory" />
+
+           </property>
+
+      </bean>
+
+ 
+
+      <!-- UserDAO bean-->
+
+      <bean id="menuItemDAO" class="com.itg.dao.MenuItemDAO">
+           <property name="sessionFactory">
+                 <ref local="sessionFactory" />
+           </property>
+      </bean>
+
+ 
+
+      <!-- 带事务处理的userDao 代理 -->
+
+      <bean id="menuItemDAOProxy"
+      class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+           <property name="transactionManager">
+                 <ref bean="transactionManager" />
+           </property>
+           <property name="target">
+                 <ref local="menuItemDAO" />
+           </property>
+           <property name="transactionAttributes">
+                 <props>
+                      <prop key="insert*">PROPAGATION_REQUIRED</prop>
+                      <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                 </props>
+           </property>
+      </bean>
+
+
+      <bean id="userRolesDAO" class="com.itg.dao.UserRolesDAO">
+           <property name="sessionFactory">
+                 <ref local="sessionFactory" />
+           </property>
+      </bean>
+
+      <bean id="userRolesDAOProxy"
+      class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+           <property name="transactionManager">
+                 <ref bean="transactionManager" />
+           </property>
+           <property name="target">
+                 <ref local="userRolesDAO" />
+           </property>
+           <property name="transactionAttributes">
+                 <props>
+                      <prop key="insert*">PROPAGATION_REQUIRED</prop>
+                      <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                 </props>
+           </property>
+      </bean>
+
+      <bean id="rolesDAO" class="com.itg.dao.RolesDAO">
+           <property name="sessionFactory">
+                 <ref local="sessionFactory" />
+           </property>
+      </bean>
+
+      <bean id="rolesDAOProxy"
+      class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+           <property name="transactionManager">
+                 <ref bean="transactionManager" />
+           </property>
+           <property name="target">
+                 <ref local="rolesDAO" />
+           </property>
+           <property name="transactionAttributes">
+                 <props>
+                      <prop key="insert*">PROPAGATION_REQUIRED</prop>
+                      <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                 </props>
+           </property>
+      </bean>
+     
+</beans>
+

@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+    <bean id="bet365Strategy" class="com.itg.strategy.Bet365Strategy">
+    	<property name="matchDAO">
+    		<ref bean="matchDAOProxy"></ref>
+    	</property>
+		<property name="oddPredictDAO">
+			<ref bean="oddPredictDAOProxy"></ref>
+		</property>    	
+		<property name="warningPct" value="90"></property>
+ 		<property name="warningCount" value="10"></property>
+    	
+    	<property name="mailTo"
+			value="liwei@itg.com.cn"></property>
+		<property name="ccTo" value=""></property>
+		<property name="strategyName" value="Bet365Number"></property>
+    	
+    </bean>
+
+    <bean id="unWindStrategy" class="com.itg.strategy.UnWindStrategy">
+    	<property name="matchDAO">
+    		<ref bean="matchDAOProxy"></ref>
+    	</property>
+		<property name="oddPredictDAO">
+			<ref bean="oddPredictDAOProxy"></ref>
+		</property>    	
+		<property name="warningPct" value="90"></property>
+ 		<property name="warningCount" value="10"></property>
+    	
+    	<property name="mailTo"
+			value="liwei@itg.com.cn"></property>
+		<property name="ccTo" value=""></property>
+		<property name="strategyName" value="LargeNumber"></property>
+    	
+    </bean>
+	<bean id="largeNumStrategy2" class="com.itg.strategy.LargeNumStrategy">
+		<property name="euroWarningPct" value="10"></property>
+		<property name="asiaWarningPct" value="75"></property>
+		
+		<property name="euroWarningCount" value="40"></property>
+		<property name="asiaBigWarningCount" value="19"></property>
+		<property name="asiaSmallWarningCount" value="19"></property>
+		<property name="asiaUpWarningCount" value="19"></property>
+		<property name="asiaDownWarningCount" value="30"></property>
+
+
+		<property name="oddPredictDAO">
+			<ref bean="oddPredictDAOProxy"></ref>
+		</property>
+		<property name="mailTo"
+			value="liwei@itg.com.cn"></property>
+		<property name="ccTo" value=""></property>
+		<property name="strategyName" value="LargeNumber"></property>
+		<property name="upCompanyFilter" value=""></property>
+		<property name="downCompanyFilter" value=";33;43;38;32;36;"></property>
+		<property name="bigCompanyFilter" value=""></property>
+		<property name="smallCompanyFilter" value=""></property>
+		<property name="euroCompanyFilter" value=""></property>
+
+	</bean>
+
+	<bean id="largeNumStrategy" class="com.itg.strategy.LargeNumStrategy">
+		<property name="euroWarningPct" value="10"></property>
+
+		<property name="asiaWarningPct" value="75"></property>
+
+		<property name="euroWarningCount" value="40"></property>
+
+		<property name="asiaBigWarningCount" value="19"></property>
+		<property name="asiaSmallWarningCount" value="19"></property>
+		<property name="asiaUpWarningCount" value="19"></property>
+		<property name="asiaDownWarningCount" value="19"></property>
+
+
+		<property name="oddPredictDAO">
+			<ref bean="oddPredictDAOProxy"></ref>
+		</property>
+		<property name="mailTo"
+			value="liwei@itg.com.cn"></property>
+		<property name="ccTo" value=""></property>
+		<property name="strategyName" value="LargeNumber"></property>
+		<property name="upCompanyFilter" value=""></property>
+		<property name="downCompanyFilter" value=";33;43;38;32;36;"></property>
+		<property name="bigCompanyFilter" value=""></property>
+		<property name="smallCompanyFilter" value=""></property>
+		<property name="euroCompanyFilter" value=";31;37;39;"></property>
+
+	</bean>
+
+	<bean id="combineStrategy" class="com.itg.strategy.CombineStrategy">
+		<property name="oddPredictDAO">
+			<ref bean="oddPredictDAOProxy"></ref>
+		</property>
+		<property name="matchDAO">
+			<ref bean="matchDAOProxy"></ref>
+		</property>
+
+		<property name="mailTo" value="liwei@itg.com.cn"></property>
+		<property name="ccTo" value=""></property>
+		<property name="strategyName" value="combineStrategy"></property>
+
+		<property name="checkList">
+			<list>
+				<value type="java.lang.String">33;2.2;3.2;2.8;37;2.3;3.1;2.6</value>
+				<value type="java.lang.String">33;2.2;3.25;2.75;37;2.3;3.1;2.6</value>
+				<value type="java.lang.String">33;2.2;3.25;2.75;43;2.25;3.4;3.1</value>
+				<value type="java.lang.String">33;1.72;3.5;5.0;33;1.72;3.5;5.0</value>
+				<value type="java.lang.String">33;1.72;3.5;5.0;33;1.72;3.5;5.0</value>
+				<value type="java.lang.String">33;2.7;3;2.3;31;2.8;3.1;2.4</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="sameOddsStrategy" class="com.itg.strategy.SameOddsStrategy">
+		<property name="oddPredictDAO">
+			<ref bean="oddPredictDAOProxy"></ref>
+		</property>
+		<property name="matchDAO">
+			<ref bean="matchDAOProxy"></ref>
+		</property>
+		<property name="matchMouthDAO">
+			<ref bean="matchMouthDAOProxy"></ref>
+		</property>
+	    <property name="propertyDAO">
+			<ref bean="propertyDAOProxy"></ref>
+		</property>
+		
+		<property name="warningBeforeMatchTime" value="120"></property>
+
+		<property name="mailTo" value="liwei@itg.com.cn"></property>
+		<property name="ccTo" value=""></property>
+		<property name="strategyName" value="sameOddsStrategy"></property>
+		<property name="remarks" value="sameOddsStrategy"></property>
+
+	</bean>
+
+
+	<bean id="sameOdds19Strategy" class="com.itg.strategy.SameOdds19Strategy">
+		<property name="oddPredictDAO">
+			<ref bean="oddPredictDAOProxy"></ref>
+		</property>
+		<property name="matchDAO">
+			<ref bean="matchDAOProxy"></ref>
+		</property>
+		<property name="matchMouthDAO">
+			<ref bean="matchMouthDAOProxy"></ref>
+		</property>
+	    <property name="propertyDAO">
+			<ref bean="propertyDAOProxy"></ref>
+		</property>
+		
+		<property name="warningBeforeMatchTime" value="120"></property>
+
+		<property name="mailTo" value="liwei@itg.com.cn"></property>
+		<property name="ccTo" value=""></property>
+		<property name="strategyName" value="sameOdds19Strategy"></property>
+		<property name="remarks" value="sameOdds19Strategy"></property>
+
+	</bean>
+
+	<bean id="sameOdds25Strategy" class="com.itg.strategy.SameOdds25Strategy">
+		<property name="oddPredictDAO">
+			<ref bean="oddPredictDAOProxy"></ref>
+		</property>
+		<property name="matchDAO">
+			<ref bean="matchDAOProxy"></ref>
+		</property>
+		<property name="matchMouthDAO">
+			<ref bean="matchMouthDAOProxy"></ref>
+		</property>
+	    <property name="propertyDAO">
+			<ref bean="propertyDAOProxy"></ref>
+		</property>
+		
+		<property name="warningBeforeMatchTime" value="120"></property>
+
+		<property name="mailTo" value="liwei@itg.com.cn"></property>
+		<property name="ccTo" value=""></property>
+		<property name="strategyName" value="sameOdds25Strategy"></property>
+		<property name="remarks" value="sameOdds25Strategy"></property>
+
+	</bean>
+
+
+	<bean id="sameOdds30Strategy" class="com.itg.strategy.SameOdds30Strategy">
+		<property name="oddPredictDAO">
+			<ref bean="oddPredictDAOProxy"></ref>
+		</property>
+		<property name="matchDAO">
+			<ref bean="matchDAOProxy"></ref>
+		</property>
+		<property name="matchMouthDAO">
+			<ref bean="matchMouthDAOProxy"></ref>
+		</property>
+	    <property name="propertyDAO">
+			<ref bean="propertyDAOProxy"></ref>
+		</property>
+		
+		<property name="warningBeforeMatchTime" value="120"></property>
+
+		<property name="mailTo" value="liwei@itg.com.cn"></property>
+		<property name="ccTo" value=""></property>
+		<property name="strategyName" value="sameOdds30Strategy"></property>
+		<property name="remarks" value="sameOdds30Strategy"></property>
+
+	</bean>
+
+
+	<bean id="scriptStrategy" class="com.itg.strategy.ScriptStrategy">
+		<property name="oddPredictDAO">
+			<ref bean="oddPredictDAOProxy"></ref>
+		</property>
+
+		<property name="propertyDAO">
+			<ref bean="propertyDAOProxy"></ref>
+		</property>
+
+		<property name="matchDAO">
+			<ref bean="matchDAOProxy"></ref>
+		</property>
+
+		<property name="matchMouthDAO">
+			<ref bean="matchMouthDAOProxy"></ref>
+		</property>
+
+
+		<property name="mailTo" value="liwei@itg.com.cn"></property>
+		<property name="ccTo" value=""></property>
+		<property name="strategyName" value="ScriptStrategy"></property>
+	</bean>
+
+
+	<bean id="scriptStrategy2" class="com.itg.strategy.ScriptStrategy2">
+		<property name="oddPredictDAO">
+			<ref bean="oddPredictDAOProxy"></ref>
+		</property>
+
+		<property name="propertyDAO">
+			<ref bean="propertyDAOProxy"></ref>
+		</property>
+
+		<property name="matchDAO">
+			<ref bean="matchDAOProxy"></ref>
+		</property>
+
+		<property name="matchMouthDAO">
+			<ref bean="matchMouthDAOProxy"></ref>
+		</property>
+
+
+		<property name="mailTo" value="liwei@itg.com.cn"></property>
+		<property name="ccTo" value=""></property>
+		<property name="strategyName" value="ScriptStrategy"></property>
+	</bean>
+
+	<bean id="unusualStrategy" class="com.itg.strategy.UnusualStrategy">
+		<property name="oddPredictDAO">
+			<ref bean="oddPredictDAOProxy"></ref>
+		</property>
+
+
+		<property name="mailTo" value="liwei@itg.com.cn"></property>
+		<property name="ccTo" value=""></property>
+		<property name="strategyName" value="UnusualStrategy"></property>
+
+
+
+
+
+	</bean>
+
+	<bean id="lotteryBot" class="com.itg.bot.LotteryBot">
+
+           <property name="jdbcTemplate">
+                 <ref bean="jdbcTemplate"></ref> 
+           </property>
+
+		<property name="strategyList">
+			<list>
+				<ref bean="largeNumStrategy"></ref>
+				<ref bean="largeNumStrategy2"></ref>
+				<ref bean="unWindStrategy"></ref>
+			    <ref bean="scriptStrategy"></ref>
+			    <ref bean="scriptStrategy2"></ref>
+			    <ref bean="bet365Strategy"></ref>			    			    
+			    
+
+			</list>
+		</property>
+
+		<property name="strategyMap">
+			<map>
+				<entry key="LargeNumStrategy">
+					<ref bean="largeNumStrategy"></ref>
+				</entry>
+
+				<entry key="LargeNumStrategy2">
+					<ref bean="largeNumStrategy2"></ref>
+				</entry>
+				
+				<entry key="unWindStrategy">
+					<ref bean="unWindStrategy"></ref>
+				</entry>
+				
+
+				<entry key="ScriptStrategy">
+					<ref bean="scriptStrategy"></ref>
+				</entry>
+
+
+				<entry key="ScriptStrategy2">
+					<ref bean="scriptStrategy2"></ref>
+				</entry>
+
+				<entry key="Bet365Strategy">
+					<ref bean="bet365Strategy"></ref>
+				</entry>
+			</map>
+		</property>
+
+
+		<property name="propertyDAO">
+			<ref bean="propertyDAOProxy"></ref>
+		</property>
+		<property name="matchDAO">
+			<ref bean="matchDAOProxy"></ref>
+		</property>
+		<property name="matchMouthDAO">
+			<ref bean="matchMouthDAOProxy"></ref>
+		</property>
+
+
+		<property name="warningFilterDAO">
+			<ref bean="warningFilterDAOProxy"></ref>
+		</property>
+
+		<property name="historyResultDAO">
+			<ref bean="historyResultDAOProxy"></ref>
+		</property>
+
+		<property name="oddPredictDAO">
+			<ref bean="oddPredictDAOProxy"></ref>
+		</property>
+
+
+		<property name="sleepTime" value="0"></property>
+		<property name="warningBeforeMatchTime" value="480"></property>
+		<property name="summaryHistoryDays" value="60"></property>
+
+
+		<property name="smtp" value="mail.itg.com.cn"></property>
+		<property name="from" value="pointer@itg.com.cn"></property>
+		<property name="to"
+			value="liwei@itg.com.cn"></property>
+		<property name="copyto" value=""></property>
+		<property name="subject" value="盘口提醒"></property>
+		<property name="username" value="pointer"></property>
+		<property name="password" value="steamer"></property>
+
+		<property name="proxy_address" value=""></property>
+		<property name="proxy_port" value="0"></property>
+
+
+
+		<property name="euroWarningPct" value="150"></property>
+		<property name="asiaWarningPct" value="70"></property>
+		<property name="euroWarningCount" value="800"></property>
+
+		<property name="asiaBigWarningCount" value="50"></property>
+		<property name="asiaSmallWarningCount" value="10"></property>
+		<property name="asiaUpWarningCount" value="50"></property>
+		<property name="asiaDownWarningCount" value="10"></property>
+
+
+	</bean>
+	<bean id="lotteryAdj" class="com.itg.bot.LotteryAdj">
+		<property name="propertyDAO">
+			<ref bean="propertyDAOProxy"></ref>
+		</property>
+		<property name="matchDAO">
+			<ref bean="matchDAOProxy"></ref>
+		</property>
+		<property name="matchMouthDAO">
+			<ref bean="matchMouthDAOProxy"></ref>
+		</property>
+
+           <property name="jdbcTemplate">
+                 <ref bean="jdbcTemplate"></ref> 
+           </property>
+
+
+
+
+
+	</bean>
+
+</beans>
+

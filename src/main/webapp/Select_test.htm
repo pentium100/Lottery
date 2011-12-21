@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!--
+	<link rel="stylesheet" type="text/css" href="http://extjs.com/deploy/dev/resources/css/ext-all.css">
+	<script type="text/javascript" src="http://extjs.com/deploy/dev/adapter/ext/ext-base.js"></script>
+	<script type="text/javascript" src="http://extjs.com/deploy/dev/ext-all-debug.js"></script>
+-->
+
+	<link rel="stylesheet" type="text/css" href="js/ext-3.0.0/resources/css/ext-all.css">
+	<script type="text/javascript" src="js/ext-3.0.0/adapter/ext/ext-base.js"></script>
+	<script type="text/javascript" src="js/ext-3.0.0/ext-all-debug.js"></script>
+	<script type="text/javascript">
+		Ext.BLANK_IMAGE_URL = 'js/ext-3.0.0/resources/images/default/s.gif';
+	</script>
+	
+	<link rel="stylesheet" type="text/css" href="Select.css">
+	<script type="text/javascript" src="Select.js"></script>
+	<script type="text/javascript" src="Select_test.js"></script>
+	<title>Ext.ux.Andrie.Select Testcase</title>
+	<style>
+		body{
+			padding:5px
+		}
+		ul{
+			list-style:square;
+			list-style-position:inside
+		}
+	</style>
+</head>
+<body>
+<div style="width:450px;font-size:14px;float:left">
+	<div id="info-ct"></div>
+	<br>
+	<div id="form-ct" style="margin-left:50px"></div>
+	<select id="singleSDOM">
+		<option value="US">United States</option>
+		<option value="DE">Germany</option>
+		<option value="FR">France</option>
+	</select>
+	<select id="multiSDOM" multiple>
+		<option value="US">United States</option>
+		<option value="DE">Germany</option>
+		<option value="FR">France</option>
+	</select>
+</div>
+	
+<div style="width:400px;padding-left:25px;float:left">
+	<div id="singles-ct"></div>
+	<br>
+	<div id="multis-ct"></div>
+	<br>
+	<div id="config-ct"></div>
+	<br>
+	<div id="public-ct"></div>
+	<br>
+	<div id="changelog-ct"></div>
+</div>
+
+	<div id="singles">
+		This field has been configured with {...}<br>
+		* (Force) means configured with forceSelection:true<br><br>
+		<ul>
+			<li><b>(Same)</b> Collapses upon selection</li>
+			<li><b>(Diff)</b> Doesn't select on TAB key press</li>
+			<li><b>(Diff)</b> Doesn't select the first element upon expansion of the list</li>
+			<li><b>(Enh)</b> Shows cursor when hovering with the mouse or using navigation keys</li>
+		</ul>
+	</div>
+	
+	<div id="multis">
+		This field has been configured with {..., <b>multiSelect:true, minLength:2</b>}<br><br>
+		<ul>
+			<li><b>(Diff)</b> Doesn't collapse upon selection. You need to blur the field for that</li>
+			<li><b>(Diff)</b> "Enter" key or mouse click to toggle cursor-item's selection</li>
+			<li><b>(Diff)</b> Not editable</li>
+			<li><b>(Diff)</b> No type ahead</li>
+		</ul>
+	</div>
+	
+	<div id="info">
+		<b>Extension to Ext.form.ComboBox [2.x], by <a href="http://andreineculau.wordpress.com">Andrei Neculau</a></b>
+		<br><br>
+		<a href="http://extjs.com/forum/showthread.php?t=16841">ExtJS Forum</a> | 
+		<a href="Select_test.js">Testcase source</a>
+		<br><br>
+		<ul>
+			<li>There is no valueNotFoundText displayed when trying to select a non-existing value</li>
+			<li>Values are kept internally in an array</li>
+			<li>Introduces the ability to erase the value by using the keyboard</li>
+			<li>The change event will fire upon forceSelection:false and bluring as well.</li>
+			<li>The change event will fire upon selection also. This is my understanding of <a href="http://www.quirksmode.org/js/events_compinfo.html">QuirksMode</a> explanation.</li>
+		</ul>
+		<br>
+		<ul>
+			<li><b>IMPORTANT!</b> Contains a "JS hack" for Ext.DataView - changes deselect method to support surpressEvent parameter</li>
+			<li><strike><b>IMPORTANT!</b> Contains a "CSS hack" in order to add a margin of 1px to listed items</strike></li>
+			<li><b>IMPORTANT!</b> Updates to "value" text fields are done by listeners to CHANGE event</li>
+			<li><b>IMPORTANT!</b> When history capabilities are enabled, the store will suffer changes</li>
+		</ul>
+	</div>
+	
+	<div id="config">
+		<ul>
+			<li><b>multiSelect</b>: bool - single or multiple selection (default:false)</li>
+			<li><b>minLength</b>: int - minimum number of elements to have selected</li>
+			<li><b>minLengthText</b>: string - text to display when minLength condition is not satisfied</li>
+			<li><b>maxLength</b>: int - maximum number of elements to have selected</li>
+			<li><b>maxLengthText</b>: string - text to display when maxLength condition is not satisfied</li>
+			<li><b>history</b>: bool - act as history field; only if mode is 'local' (remember entered values to the top of the list)</li>
+			<li><b>historyMaxLength</b>: int - number of entered values to remember, 0 means remember all (defaults to 0)</li>
+			<li><b>separator</b>: string - separator to use for the values passed to setValue (defaults to comma)</li>
+			<li><b>displaySeparator</b>: string - separator to use for displaying the values (defaults to comma)</li>
+		</ul>
+	</div>
+	
+	<div id="public">
+		Methods
+		<ul>
+			<li><b>addValue</b>: (string) - add a value and select it in the list</li>
+			<li><b>removeValue</b>: (string) - remove a value and deselect it in the list</li>
+			<li><b>addHistory</b>: (string) - add a value in field's history</li>
+			<li><b>getValue</b>: (bool) - return the value as string or as array</li>
+			<li><b>getRawValue</b>: (bool) - return the raw value as string or as array</li>
+		</ul>
+		<br>
+		Properties
+		<ul>
+			<li><strike><b>valueArray</b> - array denoting the selected values</strike> Should be considered private</li>
+			<li><strike><b>rawValueArray</b> - array denoting the selected raw values</strike> Should be considered private</li>
+		</ul>
+	</div>
+	
+	<div id="changelog">
+		<ul>
+			<li>
+				<b>0.4.1 / Nov. 20 2007</b><br>
+				Fixed a bug in commonChangeValue - rawValueArray was never updated but overwritten
+				<br><br>
+			</li>
+			<li>
+				<b>0.4 / Nov. 14 2007</b><br>
+				Removed CSS Hack - replaced with a CSS2 sibling rule (will not be noticed on older browsers)<br>
+				Added boolean parameter asArray to getValue and getRawValue<br>
+				Added separator config property<br>
+				Cleaned code<br>
+				Improvements to code speed
+				<br><br>
+			</li>
+			<li>
+				<b>0.3.8 / Nov. 12 2007</b><br>
+				Improved setValue
+				<br><br>
+			</li>
+			<li>
+				<b>0.3.7 / Nov. 7 2007</b><br>
+				Removed the incorrect "JS hack" for Ext.data.insert
+				<br><br>
+			</li>
+			<li>
+				<b>0.3.6 / Nov. 6 2007</b><br>
+				Added history capabilities<br>
+				Removed automatical spliting of multiple-value string by using comma
+				<br><br>
+			</li>
+			<li>
+				<b>0.3.5 / Nov. 5 2007</b><br>
+				Improved TwinTriggerField combination<br>
+				Improved transform markup capabilities
+				<br><br>
+			</li>
+			<li>
+				<b>0.3.4 / Nov. 5 2007</b><br>
+				Added clearTrigger config property<br>
+				Improved setValue, selectByValue function
+				<br><br>
+			</li>
+			<li>
+				<b>0.3.3 / Nov. 5 2007</b><br>
+				Added twin trigger for clearing Select's value, visible only when value exists<br>
+				Fixed clearValue (<a href="http://extjs.com/forum/showthread.php?p=82221#post82221">Forum</a>)
+				<br><br>
+			</li>
+			<li>
+				<b>0.3.2 / Nov. 4 2007</b><br>
+				Fixed deselecting item in list upon removeValue<br>
+				Improved testcase
+				<br><br>
+			</li>
+			<li>
+				<b>0.3.1 / Nov. 2 2007</b><br>
+				Added component registration, specific to Ext 2.x<br>
+				Changed testcase's way of notifying the fields' value<br>
+				Added ComboBox - Select comparison to testcase<br>
+				Added Public Methods&amp;Properties to testcase
+				<br><br>
+			</li>
+			<li>
+				<b>0.3 / Nov. 1 2007</b><br>
+				Fresh new version<br>
+				Started from scratch, switching to support Ext 2.x<br>
+				Moved the extension to Ext.ux.Andrie namespace
+				<br><br>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

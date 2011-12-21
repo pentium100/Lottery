@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+    xmlns:jaxws="http://cxf.apache.org/jaxws"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://cxf.apache.org/jaxrs
+http://cxf.apache.org/schemas/jaxrs.xsd
+http://cxf.apache.org/jaxws
+http://cxf.apache.org/schemas/jaxws.xsd
+http://www.springframework.org/schema/util
+http://www.springframework.org/schema/util/spring-util.xsd"
+    default-lazy-init="false">
+
+
+
+
+    
+
+
+     <bean id="propertyDAO" class="com.itg.dao.PropertyDAO">
+           <property name="sessionFactory">
+                 <ref bean="sessionFactory"></ref> 
+           </property>
+      </bean>
+
+      <bean id="propertyDAOProxy"
+      class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+           <property name="transactionManager">
+                 <ref bean="transactionManager" />
+           </property>
+           <property name="target">
+                 <ref local="propertyDAO" />
+           </property>
+           <property name="transactionAttributes">
+                 <props>
+                      <prop key="insert*">PROPAGATION_REQUIRED</prop>
+                      <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                      <prop key="modify*">PROPAGATION_REQUIRED</prop>
+                      <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                 </props>
+           </property>
+      </bean>    
+
+     <bean id="propertyTypeDAO" class="com.itg.dao.PropertyTypeDAO">
+           <property name="sessionFactory">
+                 <ref bean="sessionFactory"></ref> 
+           </property>
+      </bean>
+
+      <bean id="propertyTypeDAOProxy"
+      class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+           <property name="transactionManager">
+                 <ref bean="transactionManager" />
+           </property>
+           <property name="target">
+                 <ref local="propertyTypeDAO" />
+           </property>
+           <property name="transactionAttributes">
+                 <props>
+                      <prop key="insert*">PROPAGATION_REQUIRED</prop>
+                      <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                      <prop key="modify*">PROPAGATION_REQUIRED</prop>
+                      <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                 </props>
+           </property>
+      </bean>    
+
+
+
+     <bean id="matchDAO" class="com.itg.dao.MatchDAO">
+           <property name="sessionFactory">
+                 <ref bean="sessionFactory"></ref> 
+           </property>
+           <property name="matchMouthDAO">
+           		<ref bean="matchMouthDAOProxy"></ref>
+           </property>
+           <property name="jdbcTemplate">
+                 <ref bean="jdbcTemplate"></ref> 
+           </property>
+           
+      </bean>
+
+      <bean id="matchDAOProxy"
+      class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+           <property name="transactionManager">
+                 <ref bean="transactionManager" />
+           </property>
+           <property name="target">
+                 <ref local="matchDAO" />
+           </property>
+           <property name="transactionAttributes">
+                 <props>
+                      <prop key="insert*">PROPAGATION_REQUIRED</prop>
+                      <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                      <prop key="modify*">PROPAGATION_REQUIRED</prop>
+                      <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                 </props>
+           </property>
+      </bean>    
+
+     <bean id="matchMouthDAO" class="com.itg.dao.MatchMouthDAO">
+           <property name="sessionFactory">
+                 <ref bean="sessionFactory"></ref> 
+           </property>
+           <property name="propertyDAO">
+           	<ref bean="propertyDAOProxy"></ref>
+           </property>
+           <property name="jdbcTemplate">
+                 <ref bean="jdbcTemplate"></ref> 
+           </property>
+          
+      </bean>
+
+      <bean id="matchMouthDAOProxy"
+      class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+           <property name="transactionManager">
+                 <ref bean="transactionManager" />
+           </property>
+           <property name="target">
+                 <ref local="matchMouthDAO" />
+           </property>
+           <property name="transactionAttributes">
+                 <props>
+                      <prop key="insert*">PROPAGATION_REQUIRED</prop>
+                      <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                      <prop key="modify*">PROPAGATION_REQUIRED</prop>
+                      <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                 </props>
+           </property>
+      </bean>
+      
+      <bean id="historyResultDAO" class="com.itg.dao.HistoryResultDAO">
+           <property name="sessionFactory">
+                 <ref bean="sessionFactory"></ref> 
+           </property>
+      </bean>
+
+      <bean id="historyResultDAOProxy"
+      class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+           <property name="transactionManager">
+                 <ref bean="transactionManager" />
+           </property>
+           <property name="target">
+                 <ref local="historyResultDAO" />
+           </property>
+           <property name="transactionAttributes">
+                 <props>
+                      <prop key="insert*">PROPAGATION_REQUIRED</prop>
+                      <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                      <prop key="modify*">PROPAGATION_REQUIRED</prop>
+                      <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                 </props>
+           </property>
+      </bean>    
+          
+
+      <bean id="warningFilterDAO" class="com.itg.dao.WarningFilterDAO">
+           <property name="sessionFactory">
+                 <ref bean="sessionFactory"></ref> 
+           </property>
+      </bean>
+
+      <bean id="warningFilterDAOProxy"
+      class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+           <property name="transactionManager">
+                 <ref bean="transactionManager" />
+           </property>
+           <property name="target">
+                 <ref local="warningFilterDAO" />
+           </property>
+           <property name="transactionAttributes">
+                 <props>
+                      <prop key="insert*">PROPAGATION_REQUIRED</prop>
+                      <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                      <prop key="modify*">PROPAGATION_REQUIRED</prop>
+                      <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                 </props>
+           </property>
+      </bean>    
+          
+          
+      <bean id="oddPredictDAO" class="com.itg.dao.OddPredictDAO">
+           <property name="sessionFactory">
+                 <ref bean="sessionFactory" />
+           </property>
+      </bean>
+
+      <bean id="oddPredictDAOProxy"
+      class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+           <property name="transactionManager">
+                 <ref bean="transactionManager" />
+           </property>
+           <property name="target">
+                 <ref local="oddPredictDAO" />
+           </property>
+           <property name="transactionAttributes">
+                 <props>
+                      <prop key="insert*">PROPAGATION_REQUIRED</prop>
+                      <prop key="modify*">PROPAGATION_REQUIRED</prop>
+                      <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                      <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                 </props>
+           </property>
+      </bean>
+      
+
+          
+
+</beans>

@@ -1,0 +1,155 @@
+<table border="1" cellpadding="1" cellspacing="0" width="1200px" style="width: 1200px;font-size: 11px">
+	<tbody >
+		<tr background="" lang="">
+			<td  style="text-align: center">
+				时间</td>
+			<td   style="text-align: center">
+				比赛国家</td>				
+			<td   style="text-align: center">
+				赛事</td>
+			<td  style="text-align: center">
+				主队</td>
+			<td   style="text-align: center">
+				客队</td>
+			<td   style="text-align: center">
+				公司</td>
+
+			<td   style="text-align: center">
+				预计</td>
+			<td   style="text-align: center">
+				比例</td>
+			<td   style="text-align: center">
+				总场次</td>
+
+			<td   style="text-align: center">
+				比分</td>
+			<td   style="text-align: center">
+				结果</td>
+			<td   style="text-align: center">
+				准确</td>
+			<td   style="text-align: center">
+				欧赔胜</td>
+			<td  style="text-align: center">
+				欧赔平</td>
+			<td  style="text-align: center">
+				欧赔负</td>
+			<td  style="text-align: center">
+				亚赔盘口</td>
+			<td  style="text-align: center">
+				大小盘口</td>
+			<td  style="text-align: center">
+				备注</td>
+				
+		</tr>
+#set ( $ttlProfit = 0 )
+#set ( $ttlMatches = 0 )
+
+#foreach ($oddPredict in $oddPredicts)
+
+#set ( $ttlProfit = $ttlProfit + $oddPredict.getProfit() )
+#set ( $ttlMatches = $ttlMatches + 1 )
+#set ( $countryBgColor = "#ffffff" )
+#set ( $championshipBgColor = "#ffffff" )
+
+#if($oddPredict.getPk().getScope().equals(2))
+  #set ( $countryBgColor = "#f680af" )
+#end
+
+#if($oddPredict.getPk().getScope().equals(3))
+  #set ( $championshipBgColor = "#f680af" )
+#end
+
+		<tr>
+			<td  >
+				$date.format('yyyy-M-d HH:mm', $oddPredict.getMatchDate())</td>
+			<td  bgColor=$countryBgColor>
+				$!oddPredict.getCountry()&nbsp;</td>
+			<td  bgColor=$championshipBgColor>
+				$oddPredict.getChampionship()</td>
+			<td  >
+				$oddPredict.getHomeTeam()</td>
+			<td  >
+				$oddPredict.getAwayTeam()</td>
+			<td  >
+				$oddPredict.getCompany_text()</td>
+
+			<td  >
+				$oddPredict.getPk().getPredict()</td>
+			<td    style="text-align: right">
+				$number.format('#0.00', $oddPredict.getPossibility())%</td>
+			<td   style="text-align: right">
+				$oddPredict.getMatchCount()</td>
+			<td  >
+				$!oddPredict.getScore()&nbsp;</td>
+			<td  >
+				$!oddPredict.getActual()&nbsp;</td>
+			<td   style="text-align: right">
+			 #if ( $oddPredict.getProfit() )
+			  $number.format('#0.00', $oddPredict.getProfit())
+			 #else
+			   0.0
+			 #end
+				</td>
+				
+			<td   style="text-align: right">
+				$oddPredict.getEuro_final_win()</td>
+			<td   style="text-align: right">
+				$oddPredict.getEuro_final_standoff()</td>
+			<td   style="text-align: right">
+				$oddPredict.getEuro_final_loss()</td>
+			<td   style="text-align: center">
+				$!oddPredict.getUdMouth()&nbsp;</td>
+			<td   style="text-align: center">
+				$!oddPredict.getBsMouth()&nbsp;</td>
+			<td  >
+				$!oddPredict.getRemark()&nbsp;</td>
+				
+		</tr>
+#end
+
+		<tr>
+			<td  >
+				&nbsp;</td>
+			<td  >
+				&nbsp;</td>
+
+			<td  >
+				&nbsp;</td>
+			<td  >
+				&nbsp;</td>
+			<td  >
+				&nbsp;</td>
+			<td  >
+				&nbsp;</td>
+
+			<td  >
+				&nbsp;</td>
+			<td    style="text-align: right">
+				&nbsp;</td>
+			<td   style="text-align: right">
+				&nbsp;</td>
+			<td  >
+				&nbsp;</td>
+			<td  >
+				&nbsp;</td>
+			<td   style="text-align: right">
+			  $number.format('#0.00', $ttlProfit)
+				</td>
+				
+			<td   style="text-align: right">
+				$ttlMatches</td>
+			<td   style="text-align: right">
+				&nbsp;</td>
+			<td   style="text-align: right">
+				&nbsp;</td>
+			<td   style="text-align: center">
+				&nbsp;</td>
+			<td   style="text-align: center">
+				&nbsp;</td>
+			<td  >
+				&nbsp;</td>
+
+		</tr>
+		
+	</tbody>
+</table>

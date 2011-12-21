@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+
+<bean id="largeNumStrategy" class="com.itg.strategy.LargeNumStrategy2">
+    <property name="euroWarningPct" value="150"></property>
+    	       
+    <property name="asiaWarningPct" value="70"></property>
+    
+    <property name="euroWarningCount" value="30"></property>
+    
+    <property name="asiaBigWarningCount" value="10"></property>
+    <property name="asiaSmallWarningCount" value="10"></property>
+    <property name="asiaUpWarningCount" value="10"></property>
+    <property name="asiaDownWarningCount" value="10"></property>
+    <property name="oddPredictDAO"><ref bean="oddPredictDAOProxy"></ref></property>
+    <property name="mailTo" value="liwei@itg.com.cn,13761679494@139.COM,13901734341@139.COM,shshaohong@gmail.com,liwei99@gmail.com"></property>
+    <property name="ccTo" value=""></property>		
+    <property name="strategyName" value="LargeNumber"></property>
+    <property name="upCompanyFilter" value=""></property>
+    <property name="downCompanyFilter" value=";33;"></property>
+    <property name="bigCompanyFilter" value=""></property>
+    <property name="smallCompanyFilter" value=""></property>
+    <property name="euroCompanyFilter" value=""></property>
+    	<property name="propertyDAO">
+		<ref bean="propertyDAOProxy"></ref>
+	</property>
+
+</bean>
+
+<bean id="lbItwStrategy" class="com.itg.strategy.LbItwStrategy">
+		<property name="oddPredictDAO">
+			<ref bean="oddPredictDAOProxy"></ref>
+		</property>
+		<property name="matchDAO">
+			<ref bean="matchDAOProxy"></ref>
+		</property>
+		
+		<property name="mailTo" value="liwei@itg.com.cn"></property>
+		<property name="ccTo" value="13761679494@139.com"></property>
+		<property name="strategyName" value="LbItwNumber"></property>
+		
+		
+		<property name="company1" value="33"></property>
+		<property name="company2" value="37"></property>
+		
+		<property name="euro_final_win1" value="2.2"></property>
+		<property name="euro_final_standoff1" value="3.2"></property>
+		<property name="euro_final_loss1" value="2.8"></property>
+		
+		<property name="euro_final_win2" value="2.3"></property>
+		<property name="euro_final_standoff2" value="3.1"></property>
+		<property name="euro_final_loss2" value="2.6"></property>
+		
+		
+
+	</bean>
+
+
+	<bean id="itwLbStrategy" class="com.itg.strategy.LbItwStrategy">
+		<property name="oddPredictDAO">
+			<ref bean="oddPredictDAOProxy"></ref>
+		</property>
+		<property name="matchDAO">
+			<ref bean="matchDAOProxy"></ref>
+		</property>
+		
+		<property name="mailTo" value="liwei@itg.com.cn"></property>
+		<property name="ccTo" value="13761679494@139.com"></property>
+		<property name="strategyName" value="itwLbNumber"></property>
+		
+
+		
+		<property name="company2" value="33"></property>
+		<property name="company1" value="37"></property>
+		
+		<property name="euro_final_win2" value="2.2"></property>
+		<property name="euro_final_standoff2" value="3.2"></property>
+		<property name="euro_final_loss2" value="2.8"></property>
+		
+		<property name="euro_final_win1" value="2.3"></property>
+		<property name="euro_final_standoff1" value="3.1"></property>
+		<property name="euro_final_loss1" value="2.6"></property>
+		
+		
+
+	</bean>
+
+<bean id="lbItwStrategy2" class="com.itg.strategy.LbItwStrategy">
+		<property name="oddPredictDAO">
+			<ref bean="oddPredictDAOProxy"></ref>
+		</property>
+		<property name="matchDAO">
+			<ref bean="matchDAOProxy"></ref>
+		</property>
+		
+		<property name="mailTo" value="liwei@itg.com.cn"></property>
+		<property name="ccTo" value="13761679494@139.com"></property>
+		<property name="strategyName" value="LbItwNumber2"></property>
+		
+		
+		<property name="company1" value="33"></property>
+		<property name="company2" value="37"></property>
+		
+		<property name="euro_final_win1" value="2.2"></property>
+		<property name="euro_final_standoff1" value="3.25"></property>
+		<property name="euro_final_loss1" value="2.75"></property>
+		
+		<property name="euro_final_win2" value="2.3"></property>
+		<property name="euro_final_standoff2" value="3.1"></property>
+		<property name="euro_final_loss2" value="2.6"></property>
+		
+		
+
+	</bean>
+
+
+	<bean id="itwLbStrategy2" class="com.itg.strategy.LbItwStrategy">
+		<property name="oddPredictDAO">
+			<ref bean="oddPredictDAOProxy"></ref>
+		</property>
+		<property name="matchDAO">
+			<ref bean="matchDAOProxy"></ref>
+		</property>
+		
+		<property name="mailTo" value="liwei@itg.com.cn"></property>
+		<property name="ccTo" value="13761679494@139.com"></property>
+		<property name="strategyName" value="itwLbNumber2"></property>
+		
+
+		
+		<property name="company2" value="33"></property>
+		<property name="company1" value="37"></property>
+		
+		<property name="euro_final_win2" value="2.2"></property>
+		<property name="euro_final_standoff2" value="3.25"></property>
+		<property name="euro_final_loss2" value="2.75"></property>
+		
+		<property name="euro_final_win1" value="2.3"></property>
+		<property name="euro_final_standoff1" value="3.1"></property>
+		<property name="euro_final_loss1" value="2.6"></property>
+		
+		
+
+	</bean>
+
+
+	<bean id="lbBetStrategy" class="com.itg.strategy.LbItwStrategy">
+		<property name="oddPredictDAO">
+			<ref bean="oddPredictDAOProxy"></ref>
+		</property>
+		<property name="matchDAO">
+			<ref bean="matchDAOProxy"></ref>
+		</property>
+		
+		<property name="mailTo" value="liwei@itg.com.cn"></property>
+		<property name="ccTo" value="13761679494@139.com"></property>
+		<property name="strategyName" value="lbBetNumber"></property>
+		
+		
+		<property name="company1" value="33"></property>
+		<property name="company2" value="43"></property>
+		
+		<property name="euro_final_win1" value="2.2"></property>
+		<property name="euro_final_standoff1" value="3.25"></property>
+		<property name="euro_final_loss1" value="2.75"></property>
+		
+		<property name="euro_final_win2" value="2.25"></property>
+		<property name="euro_final_standoff2" value="3.4"></property>
+		<property name="euro_final_loss2" value="3.1"></property>
+		
+		
+
+	</bean>
+
+
+	<bean id="betLbStrategy" class="com.itg.strategy.LbItwStrategy">
+		<property name="oddPredictDAO">
+			<ref bean="oddPredictDAOProxy"></ref>
+		</property>
+		<property name="matchDAO">
+			<ref bean="matchDAOProxy"></ref>
+		</property>
+		
+		<property name="mailTo" value="liwei@itg.com.cn"></property>
+		<property name="ccTo" value="13761679494@139.com"></property>
+		<property name="strategyName" value="betLbNumber"></property>
+		
+
+		
+		<property name="company2" value="43"></property>
+		<property name="company1" value="33"></property>
+		
+		<property name="euro_final_win2" value="2.2"></property>
+		<property name="euro_final_standoff2" value="3.25"></property>
+		<property name="euro_final_loss2" value="2.75"></property>
+		
+		<property name="euro_final_win1" value="2.25"></property>
+		<property name="euro_final_standoff1" value="3.4"></property>
+		<property name="euro_final_loss1" value="3.1"></property>
+		
+		
+
+	</bean>
+
+
+<bean id="lotteryBot" class="com.itg.bot.LotteryBot">
+
+	<property name="strategyList">
+			<list>
+				<ref bean="largeNumStrategy"></ref>
+				<ref bean="lbItwStrategy"></ref>
+				<ref bean="itwLbStrategy"></ref>
+				<ref bean="lbItwStrategy2"></ref>
+				<ref bean="itwLbStrategy2"></ref>
+				<ref bean="lbBetStrategy"></ref>
+				<ref bean="betLbStrategy"></ref>
+
+
+			</list>
+		</property>
+
+		<property name="strategyMap">
+			<map>
+				<entry key="LargeNumber">
+					<ref bean="largeNumStrategy"></ref>
+				</entry>
+				<entry key="LbItwStrategy">
+					<ref bean="lbItwStrategy"></ref>
+				</entry>
+				<entry key="ItwLbStrategy">
+					<ref bean="itwLbStrategy"></ref>
+				</entry>
+
+				<entry key="LbItwStrategy2">
+					<ref bean="lbItwStrategy2"></ref>
+				</entry>
+				<entry key="ItwLbStrategy2">
+					<ref bean="itwLbStrategy2"></ref>
+				</entry>
+				<entry key="LbBetStrategy">
+					<ref bean="lbBetStrategy"></ref>
+				</entry>
+				<entry key="BetLbStrategy">
+					<ref bean="betLbStrategy"></ref>
+				</entry>
+
+			</map>
+		</property>
+
+ 
+	<property name="propertyDAO">
+		<ref bean="propertyDAOProxy"></ref>
+	</property>
+	<property name="matchDAO">
+		<ref bean="matchDAOProxy"></ref>
+	</property>
+	<property name="matchMouthDAO">
+		<ref bean="matchMouthDAOProxy"></ref>
+	</property>
+	
+
+	<property name="warningFilterDAO">
+		<ref bean="warningFilterDAOProxy"></ref>
+	</property>
+
+	<property name="historyResultDAO">
+		<ref bean="historyResultDAOProxy"></ref>
+	</property>
+
+	<property name="oddPredictDAO">
+		<ref bean="oddPredictDAOProxy"></ref>
+	</property>
+
+
+	<property name="sleepTime" value="4"></property>
+	<property name="warningBeforeMatchTime" value="40"></property>
+	<property name="summaryHistoryDays" value="60"></property>
+
+
+	<property name="smtp" value="mail.itg.com.cn"></property>
+	<property name="from" value="pointer@itg.com.cn"></property>
+	<property name="to" value="liwei@itg.com.cn,13761679494@139.COM,13901734341@139.COM,shshaohong@gmail.com,liwei99@gmail.com"></property>
+    <property name="copyto" value=""></property>		
+    <property name="subject" value="盘口提醒"></property>		       
+	<property name="username" value="pointer"></property>	       
+	<property name="password" value="steamer"></property>
+	
+	<property name="proxy_address" value=""></property>
+    <property name="proxy_port" value="0"></property>	       
+	   
+	    
+	
+    <property name="euroWarningPct" value="150"></property>	       
+    <property name="asiaWarningPct" value="70"></property>
+    <property name="euroWarningCount" value="800"></property>
+
+    <property name="asiaBigWarningCount" value="50"></property>
+    <property name="asiaSmallWarningCount" value="10"></property>
+    <property name="asiaUpWarningCount" value="50"></property>
+    <property name="asiaDownWarningCount" value="10"></property>
+	   
+	    
+</bean>      
+<bean id="lotteryAdj" class="com.itg.bot.LotteryAdj">
+	<property name="propertyDAO">
+		<ref bean="propertyDAOProxy"></ref>
+	</property>
+	<property name="matchDAO">
+		<ref bean="matchDAOProxy"></ref>
+	</property>
+	<property name="matchMouthDAO">
+		<ref bean="matchMouthDAOProxy"></ref>
+	</property>
+	
+	       
+	   
+	    
+	
+</bean>      
+
+</beans>
+
