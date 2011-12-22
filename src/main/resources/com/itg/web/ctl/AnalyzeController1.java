@@ -209,7 +209,8 @@ public class AnalyzeController1 {
 		
 		
 		MatchMouth mm = matchMouthDAO.findMatchMouthById(match.getId());
-		
+		mm.setWater_level(match.getWater_level());
+		mm.setInterval(match.getInterval());
 		mm.setPan(match.getPan());
 		mm.setFen(match.getFen());
 		mm.setAsia_early_big(match.getAsia_early_big());
