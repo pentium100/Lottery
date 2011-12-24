@@ -20,6 +20,6 @@ public interface IMatchMouthDAO {
 	   public List<MatchMouth> findMatchMouthByMatchId(int matchId2);
 	   
 	   
-	   
+	   public void setMatchMouthInterval(MatchMouth mm) ;
 
 }

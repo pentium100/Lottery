@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 import org.hibernate.LockMode;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 public class MatchMouthDAO extends HibernateDaoSupport implements
@@ -567,6 +568,33 @@ public class MatchMouthDAO extends HibernateDaoSupport implements
 
 		return -1;
 	}
+	
+	
+	public void setMatchMouthInterval(MatchMouth mm) {
+
+		if (mm.getEuro_early_loss() == null || mm.getEuro_early_win() == null) {
+			return;
+		}
+
+		Double level = mm.getEuro_early_loss();
+		if (level > mm.getEuro_early_win()) {
+			level = mm.getEuro_early_win();
+		}
+		// level = Math.floor(level * 100) / 100;
+		String sql = "select * " + "  from euro_interval"
+				+ "  where low <= :level" + "  order by low desc";
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		params.put("level", level);
+
+		SqlRowSet rs = jdbcTemplate.queryForRowSet(sql, params);
+		if (rs.first()) {
+			mm.setWater_level(rs.getString("water_level"));
+			mm.setInterval(rs.getString("interval"));
+		}
+
+	}	
 
 	@Override
 	public List<MatchMouth> findMatchMouthByMatchId(int matchId2) {

@@ -1142,6 +1142,8 @@ public class LotteryBot implements Callable<String> {
 
 	}
 
+
+	
 	private void setMatchMouthInterval(MatchMouth mm) {
 
 		if (mm.getEuro_early_loss() == null || mm.getEuro_early_win() == null) {

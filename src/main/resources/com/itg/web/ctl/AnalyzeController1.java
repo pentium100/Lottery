@@ -4,7 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +16,7 @@ import net.sf.json.JsonConfig;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpEntity;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.WebDataBinder;
@@ -179,6 +182,8 @@ public class AnalyzeController1 {
 	}
 
 	
+
+	
 	@RequestMapping(value="/getAnalyzeResult4/{matchMouthId}", method=RequestMethod.PUT)
 	public String updateMatchMouth(
 			@PathVariable("matchMouthId") Integer matchMouthId,  
@@ -209,8 +214,6 @@ public class AnalyzeController1 {
 		
 		
 		MatchMouth mm = matchMouthDAO.findMatchMouthById(match.getId());
-		mm.setWater_level(match.getWater_level());
-		mm.setInterval(match.getInterval());
 		mm.setPan(match.getPan());
 		mm.setFen(match.getFen());
 		mm.setAsia_early_big(match.getAsia_early_big());
@@ -231,6 +234,10 @@ public class AnalyzeController1 {
 		mm.setEuro_final_loss(match.getEuro_final_loss());
 		mm.setEuro_final_standoff(match.getEuro_final_standoff());
 		mm.setEuro_final_win(match.getEuro_final_win());
+		matchMouthDAO.setResult(mm, m.getScore());
+		matchMouthDAO.setMatchMouthInterval(mm);
+		
+		
 		matchMouthDAO.modifyMatchMouth(mm);
 		
 		map.put("result", new ArrayList());
