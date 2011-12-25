@@ -199,7 +199,7 @@ public class AnalyzeController1 {
 		m.setAway_power(match.getAway_power());
 		m.setRemark(match.getRemark());
 		
-		m.setCompany(match.getCompany());
+
 		m.setChampionship(match.getChampionship());
 		m.setDate(match.getDate());
 		m.setAwayTeam(match.getAwayTeam());
@@ -214,6 +214,7 @@ public class AnalyzeController1 {
 		
 		
 		MatchMouth mm = matchMouthDAO.findMatchMouthById(match.getId());
+		mm.setCompany(match.getCompany());
 		mm.setPan(match.getPan());
 		mm.setFen(match.getFen());
 		mm.setAsia_early_big(match.getAsia_early_big());
