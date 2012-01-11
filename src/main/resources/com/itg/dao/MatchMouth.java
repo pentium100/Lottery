@@ -283,7 +283,7 @@ public class MatchMouth {
 			setChanged(true);
 		}
 
-		this.asia_final_ud_mouth = asia_final_ud_mouth;
+		this.asia_final_ud_mouth = asia_final_ud_mouth==0?null:asia_final_ud_mouth;
 	}
 
 	public Double getAsia_final_down() {
@@ -307,7 +307,11 @@ public class MatchMouth {
 	}
 
 	public void setAsia_early_ud_mouth(Integer asia_early_ud_mouth) {
-		this.asia_early_ud_mouth = asia_early_ud_mouth;
+		
+		this.asia_early_ud_mouth = asia_early_ud_mouth==0?null:asia_early_ud_mouth;
+		//if(asia_early_ud_mouth==0){
+		//	this.asia_early_ud_mouth = null;
+		//}
 	}
 
 	public Double getAsia_early_down() {
@@ -335,7 +339,7 @@ public class MatchMouth {
 			changedField=changedField+"#asia_final_bs_mouth#";
 			setChanged(true);
 		}
-		this.asia_final_bs_mouth = asia_final_bs_mouth;
+		this.asia_final_bs_mouth = asia_final_bs_mouth==0?null:asia_final_bs_mouth;
 	}
 
 	public Double getAsia_final_small() {
@@ -359,7 +363,7 @@ public class MatchMouth {
 	}
 
 	public void setAsia_early_bs_mouth(Integer asia_early_bs_mouth) {
-		this.asia_early_bs_mouth = asia_early_bs_mouth;
+		this.asia_early_bs_mouth = asia_early_bs_mouth==0?null:asia_early_bs_mouth;
 	}
 
 	public Double getAsia_early_small() {

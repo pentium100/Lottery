@@ -128,7 +128,7 @@ Ext.onReady(function() {
     
     filter = userGrid.filters.getFilter('company');
     filter.setActive(true, false);
-    filter.setValue([31], false);
+    filter.setValue([31,33], false);
     
     filter = userGrid.filters.getFilter('championship');
     filter.setActive(true, false);
