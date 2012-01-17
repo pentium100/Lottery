@@ -166,7 +166,7 @@ public class MatchDAO extends HibernateDaoSupport implements IMatchDAO {
 		sql.append(" and m.awayteam = t2.id");
 		sql.append(" and p.id = m.championship ");
 		//sql.append(" and p.id in (49,50,53,55,57,64,1272,6662,6663,6664,6693,6703)");
-		sql.append(" and p.id in (49,50,6455)");
+		sql.append(" and p.id in (49,50,6455,64)");
 		
 		StringBuffer con = new StringBuffer();
 		for(int i = 0;i<fl.size();i++){
@@ -394,7 +394,7 @@ public class MatchDAO extends HibernateDaoSupport implements IMatchDAO {
 		sql.append("  and p.propertytype_id = 1 ");
 		sql.append("  and p.id = m.championship ");
 		//sql.append("  and p.id in (49,50,53,55,57,64,1272,6662,6663,6664,6693,6703)");
-		sql.append("  and p.id in (49,50,6455)");
+		sql.append("  and p.id in (49,50,6455,64)");
 		 
 
 		StringBuffer con = new StringBuffer();
