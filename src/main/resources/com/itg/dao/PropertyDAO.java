@@ -35,7 +35,7 @@ public class PropertyDAO extends HibernateDaoSupport implements IPropertyDAO {
 		
 		if(propertyType==1){
 			//sql="From Property where PropertyType_id=? and id in (49,50,53,55,57,64,1272,6662,6663,6664,6693,6703) order by text";
-			sql="From Property where PropertyType_id=? and id in (49,50, 6455,64) order by text";
+			sql="From Property where PropertyType_id=? and id in (49,50, 6455,64,52) order by text";
 	
 		}
 		
@@ -47,7 +47,7 @@ public class PropertyDAO extends HibernateDaoSupport implements IPropertyDAO {
 		if (propertyType==2){
 			sql="select distinct p From Property p, Match m where p.propertyType_id=? and (p.id = m.homeTeam  or p.id = m.awayTeam )"+			
 		           //" and m.championship in (49,50,53,55,57,64,1272,6662,6663,6664,6693,6703)"+
-		           " and m.championship in (49,50,6455,64)"+
+		           " and m.championship in (49,50,6455,64,52)"+
 					"order by text";
 		}
 

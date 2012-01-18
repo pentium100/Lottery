@@ -460,13 +460,11 @@ public class LotteryBot implements Callable<String> {
 					logger.error("stop thread error!");
 				}
 
-			} catch (InterruptedException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-
-			} catch (ExecutionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				threadFactory.getThread().stop();
+				logger.error("stop thread error!");
 			}
 
 			// executor.shutdown();
