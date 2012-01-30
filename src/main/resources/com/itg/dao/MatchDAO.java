@@ -149,6 +149,7 @@ public class MatchDAO extends HibernateDaoSupport implements IMatchDAO {
         
         sql.append(", mm.fen as fen");
         sql.append(", mm.pan as pan");
+        sql.append(", mm.xing as xing");        
         
         sql.append(", m.home_power as home_power");
         sql.append(", m.away_power as away_power");
@@ -166,7 +167,7 @@ public class MatchDAO extends HibernateDaoSupport implements IMatchDAO {
 		sql.append(" and m.awayteam = t2.id");
 		sql.append(" and p.id = m.championship ");
 		//sql.append(" and p.id in (49,50,53,55,57,64,1272,6662,6663,6664,6693,6703)");
-		sql.append(" and p.id in (49,50,6455,64, 52)");
+		sql.append(" and p.id in (49,50,6455)");
 		
 		StringBuffer con = new StringBuffer();
 		for(int i = 0;i<fl.size();i++){
@@ -218,6 +219,7 @@ public class MatchDAO extends HibernateDaoSupport implements IMatchDAO {
 		
 		t = t.replaceAll("^fen$", "mm.fen");
 		t = t.replaceAll("^pan$", "mm.pan");
+		t = t.replaceAll("^xing$", "mm.xing");		
 	    //t.replaceAll(regex, replacement)
 		
 		
@@ -310,6 +312,7 @@ public class MatchDAO extends HibernateDaoSupport implements IMatchDAO {
 	            m.setHome_power(rs.getString("home_power"));
 	            m.setAway_power(rs.getString("away_power"));
 	            m.setRemark(rs.getString("remark"));
+	            m.setXing(rs.getString("xing"));
 	            
 	            return m;
 	        }
@@ -394,7 +397,7 @@ public class MatchDAO extends HibernateDaoSupport implements IMatchDAO {
 		sql.append("  and p.propertytype_id = 1 ");
 		sql.append("  and p.id = m.championship ");
 		//sql.append("  and p.id in (49,50,53,55,57,64,1272,6662,6663,6664,6693,6703)");
-		sql.append("  and p.id in (49,50,6455,64, 52)");
+		sql.append("  and p.id in (49,50,6455)");
 		 
 
 		StringBuffer con = new StringBuffer();
@@ -444,7 +447,7 @@ public class MatchDAO extends HibernateDaoSupport implements IMatchDAO {
 		t = t.replaceAll("home_power", "m.home_power");
 		t = t.replaceAll("away_power", "m.away_power");
 		t = t.replaceAll("remark", "m.remark");
-		
+		t = t.replaceAll("^xing$", "mm.xing");
 		
 		
 		sql.append(t);

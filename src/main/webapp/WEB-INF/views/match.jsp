@@ -117,7 +117,16 @@
 
            }
            ,{id:'level',header: "级别", width: 40, sortable: true,  dataIndex: 'level', filter:{type:'numeric'}, hidden:true}
-           ,{id:'isInHome',header: "主场", width: 40, sortable: true,  dataIndex: 'isInHome', filter:{type:'boolean'}, hidden: true}
+           ,{id:'isInHome',header: "主场", width: 40, sortable: true,  dataIndex: 'isInHome', filter:{type:'boolean'}, hidden: true
+				,editor:{
+        		   
+        		   //xtype: 'textfield'
+        		   xtype: 'combo',
+        		   
+        		   store:['true','false']
+        	   }   
+           }
+           
            ,{id:'homeTeam',dataIndex:'homeTeam',header: "主队", width: 100, sortable: true, storeKey:'team', renderer: renderTeamName
         	   ,editor:{
         		   xtype: 'combo',
@@ -248,6 +257,18 @@
         	  }
 
         	}           
+           ,{id:'xing',dataIndex:'xing',header: "型", width: 40, sortable: true, hidden:  false
+         	  ,editor:{
+         		   
+         		   //xtype: 'textfield'
+         		   xtype: 'combo',
+         		   
+         		   store:['标','缩','涨']
+         		   
+         	   }
+            }
+           
+           
            ,{id:'interval',dataIndex:'interval',header: "区", width: 25, sortable: true, hidden:  false
         	   ,editor:{
         		   xtype: 'textfield'        		   
@@ -308,6 +329,7 @@
         	   ,editor:{
         		   
         		   xtype: 'htmleditor'
+        		   //xtype: 'textfield'
         		   
         	   }
    
@@ -321,7 +343,8 @@
 	}
 	
 	var p_editor = new Ext.ux.grid.RowEditor({
-	        saveText: 'Update'
+	        saveText: 'Update',
+	        frame: false
 	    });		
 	
 	function p_buildForm2() {

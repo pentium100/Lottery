@@ -52,8 +52,19 @@ public class Match {
     
     @Transient
     private String pan;
-    
+
+
     @Transient
+    private String xing;
+
+    
+    public String getXing() {
+		return xing;
+	}
+	public void setXing(String xing) {
+		this.xing = xing;
+	}
+	@Transient
     public String getFen() {
 		return fen;
 	}
@@ -71,7 +82,9 @@ public class Match {
     
     private String away_power;
     
+    @Column(length=65535)
     private String remark;
+    
     @Transient
 	public String getInterval() {
 		return interval;

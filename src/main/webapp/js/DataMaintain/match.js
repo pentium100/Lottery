@@ -20,7 +20,7 @@ var p_matchRecordType = new Ext.data.Record.create([
                       						,{name: 'score', allowBlank: true, type:'string'}
                       						,{name: 'level', allowBlank: true, type:'int'}
                       						,{name: 'isInHome', allowBlank: true, type:'boolean'}
-                      						,{name: 'offerTime', allowBlank: false, type:'date', dateFormat:'Y-m-d\TH:i:sP'}
+                      						,{name: 'offerTime', allowBlank: true, type:'date', dateFormat:'Y-m-d\TH:i:sP'}
                       						,{name: 'euro_final_win', allowBlank: true, type:'float'}
                       						,{name: 'euro_final_standoff', allowBlank: true, type:'float'}
                       						,{name: 'euro_final_loss', allowBlank: true, type:'float'}
@@ -59,7 +59,7 @@ var p_matchRecordType = new Ext.data.Record.create([
 
                       						,{name: 'interval', allowBlank: true, type:'string'}    						
                       						,{name: 'water_level', allowBlank: true, type:'string'}
-                      						
+                      						,{name: 'xing', allowBlank: true, type:'string'}
                       						,{name: 'fen', allowBlank: true, type:'string'}    						
                       						,{name: 'pan', allowBlank: true, type:'string'}
 
@@ -626,6 +626,12 @@ var p_matchFilterConfig =[
                 		dataIndex: 'fen',
                 		type:'list',
                 		options:['逆','顺','中','缓']
+                		
+                	},	 				
+                	{
+                		dataIndex: 'xing',
+                		type:'list',
+                		options:['标','缩','涨']
                 		
                 	}
                 	,	 				

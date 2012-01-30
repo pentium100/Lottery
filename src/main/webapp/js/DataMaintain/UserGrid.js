@@ -287,6 +287,19 @@ App.user.Grid = Ext.extend(Ext.grid.GridPanel, {
 										+ Base64.encode(vExportContent);
 							}
 						}
+					},
+
+					{
+						xtype : "button",
+						text : "保存数据",
+						handler : function(btn) {
+							// debugger;
+							
+							
+							store.save();
+
+						}
+
 					}]
 		});
 

@@ -206,8 +206,10 @@ public class AnalyzeController1 {
 		m.setHomeTeam(match.getHomeTeam());
 		m.setHomeTeamPosition(match.getHomeTeamPosition());
 		m.setAwayTeamPosition(match.getAwayTeamPosition());
+		m.setRankDiff(m.getAwayTeamPosition()-m.getHomeTeamPosition());
 		m.setIsInHome(match.getIsInHome());
 		m.setScore(match.getScore());
+		
 		
 		
 		matchDAO.modifyMatch(m);
@@ -235,6 +237,7 @@ public class AnalyzeController1 {
 		mm.setEuro_final_loss(match.getEuro_final_loss());
 		mm.setEuro_final_standoff(match.getEuro_final_standoff());
 		mm.setEuro_final_win(match.getEuro_final_win());
+		mm.setXing(match.getXing());
 		matchMouthDAO.setResult(mm, m.getScore());
 		matchMouthDAO.setMatchMouthInterval(mm);
 		

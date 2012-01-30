@@ -87,8 +87,18 @@ public class MatchMouth {
     @Column(length=1, columnDefinition="nvarchar")
     private String pan;
     
+    @Column(length=1, columnDefinition="nvarchar")
+    private String xing;    
     
 
+
+	public String getXing() {
+		return xing;
+	}
+
+	public void setXing(String xing) {
+		this.xing = xing;
+	}
 
 	public String getFen() {
 		return fen;
