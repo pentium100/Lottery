@@ -158,7 +158,7 @@
         	   
            }           
            
-           ,{id:'rankDiff',dataIndex:'rankDiff',header: "排名差", width: 50, sortable: true, hidden:true
+           ,{id:'rankDiff',dataIndex:'rankDiff',header: "差", width: 30, sortable: true, hidden:false, align:'right'
         	   ,editor:{
         		   xtype: 'numberfield'
         		   
