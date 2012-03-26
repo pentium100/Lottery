@@ -41,7 +41,7 @@ public class PropertyDAO extends HibernateDaoSupport implements IPropertyDAO {
 		
 		if (propertyType==6){
 			//sql="From Property where PropertyType_id=? and id in (6454,6458,6462,6464,6466,6661,6692,6702) order by text";
-			sql="From Property where PropertyType_id=? and id in (6454) order by text";
+			sql="From Property where PropertyType_id=? and id in (6454,6458) order by text";
 		}
 		
 		if (propertyType==2){
