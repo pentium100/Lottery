@@ -109,7 +109,7 @@ App.user.Grid = Ext.extend(Ext.grid.GridPanel, {
 
 							filter = grid.filters.getFilter('championship');
 							filter.setActive(true, false);
-							filter.setValue([49, 50, 53, 55, 57, 64, 1272]);
+							filter.setValue([49, 53]);
 							
 							//49	1	英超
 							//50	1	英冠
